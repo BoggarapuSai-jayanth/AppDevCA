@@ -1,0 +1,149 @@
+GitHub Link: https://github.com/Sai1449/AppDevCA
+
+Code:
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/et1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CGPA Calculator"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="15dp"/>
+
+    <TextView
+        android:id="@+id/et2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sai Jayanth"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="5dp"/>
+
+    <TextView
+        android:id="@+id/et3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12306993"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="20dp"/>
+
+    <ImageView
+        android:id="@+id/et4"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/formal"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/et5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subject 1"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/et6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Subject 1 CGPA"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:id="@+id/et7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subject 2"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/et8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Subject 2 CGPA"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:id="@+id/et9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subject 3"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/etSub3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Subject 3 CGPA"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="15dp"/>
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate CGPA"
+        android:padding="14dp"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>
+
+Kotlin:
+
+package com.cscorner.appdevca
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val sub1 = findViewById<EditText>(R.id.et6)
+        val sub2 = findViewById<EditText>(R.id.et8)
+        val sub3 = findViewById<EditText>(R.id.etSub3)
+
+        val btnCal = findViewById<Button>(R.id.btnCalculate)
+
+        btnCal.setOnClickListener {
+
+            val s1 = sub1.text.toString()
+            val s2 = sub2.text.toString()
+            val s3 = sub3.text.toString()
+
+            if (s1.isEmpty() || s2.isEmpty() || s3.isEmpty()) {
+                Toast.makeText(this, "Please enter all 3 subject CGPA", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val m1 = s1.toFloat()
+            val m2 = s2.toFloat()
+            val m3 = s3.toFloat()
+
+            val cgpa = ( (m1/10) + (m2/10) + (m3/10) ) / 3
+
+            Toast.makeText(this, "Your CGPA: %.2f".format(cgpa), Toast.LENGTH_LONG).show()
+        }
+
+    }
+}
